@@ -12,4 +12,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include=".github\workflows\demo.yml" />
+  </ItemGroup>
+
 </Project>
