@@ -1,6 +1,7 @@
 name: primer workflow
 run-name: Workflow para entender el funcionamiento automatizado
 
+
 on: push
 
 jobs:
@@ -8,4 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "hola workflow"
-      - run: echo "siguiente"
+      - run: echo "siguiente" > archivo.txt
+      - run: sleep 10
+
+  example_job2:
+    needs: example_job
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "hola workflow desde job 2"
+      - run: echo "Final"
