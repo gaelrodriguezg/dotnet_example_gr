@@ -4,16 +4,42 @@ run-name: Workflow para entender el funcionamiento automatizado
 
 on: push
 
+env:
+  MY_VARIABLE: 'desde mi variable'
+
 jobs:
   example_job:
     runs-on: ubuntu-latest
+    env:
+      OTRO: otra
     steps:
-      - run: echo "hola workflow"
+      - run: echo "global $MY_VARIABLE"
+      - run: echo "jobs $OTRO"
       - run: echo "siguiente" > archivo.txt
-      - run: sleep 10
+      - name: "Step con variable"
+        run: echo "mas variable $MAS"
+        env:
+          MAS: SAM
+      - name: "Step con variable 2"
+        run: echo "mas variable $MAS"
+      - run: sleep 1
 
   example_job2:
     needs: example_job
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+      - run: echo "hola workflow desde job 2"
+      - name: condicion
+        if: runner.os == 'Windows'
+        run: echo "w"
+      - run: ./gradlew build
+
+  example_fail:
+    if: ${{ failure() }}
+    needs: example_job2
     runs-on: ubuntu-20.04
     steps:
       - run: echo "hola workflow desde job 2"
