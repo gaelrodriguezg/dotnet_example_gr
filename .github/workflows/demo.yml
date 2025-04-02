@@ -13,15 +13,15 @@ jobs:
     env:
       OTRO: otra
     steps:
-      - run: echo "global $MY_VARIABLE"
-      - run: echo "jobs $OTRO"
+      - run: echo "global $CON_DB"
+      - run: echo "jobs $CON_DB"
       - run: echo "siguiente" > archivo.txt
       - name: "Step con variable"
-        run: echo "mas variable $MAS"
+        run: echo "mas variable $CON_DB"
         env:
           MAS: SAM
       - name: "Step con variable 2"
-        run: echo "mas variable $MAS"
+        run: echo "mas variable $CON_DB"
       - run: sleep 1
 
   example_job2:
